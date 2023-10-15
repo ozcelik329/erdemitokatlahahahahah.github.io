@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tokat Butonu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        #tokatButonu {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        #tokatButonu img {
+            max-width: 100px;
+        }
+
+        #tokatSayac {
+            font-size: 24px;
+            margin-top: 10px;
+        }
+
+        .gif {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button id="tokatButonu">
+            <img src="https://static.vecteezy.com/system/resources/previews/002/046/954/large_2x/comic-speech-bubble-with-slap-text-free-vector.jpg" alt="Tokat Resmi">
+        </button>
+        <p id="tokatSayac">0</p>
+    </div>
+    <div class="gif">
+        <!-- Gif'i gösteren <img> etiketini <img> etiketiyle değiştirdik -->
+        <img id="tokatGif" src="https://github.com/ozcelik329/erdemtokat3/raw/main/İsimsiz%20video%20–%20Clipchamp%20ile%20yapıldı.gif" width="320" height="180">
+        <audio id="tokatSesi">
+            <source src="https://github.com/ozcelik329/erdemtokat3/raw/main/Slap%20Bright%20Hard%20-%20QuickSounds.com.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+    <script>
+        const tokatButonu = document.getElementById('tokatButonu');
+        const tokatSayac = document.getElementById('tokatSayac');
+        const gif = document.querySelector('.gif');
+        const tokatGif = document.getElementById('tokatGif'); // Gif'i kontrol etmek için img öğesini seçtik
+        const tokatSesi = document.getElementById('tokatSesi');
+
+        let sayac = 0;
+
+        tokatButonu.addEventListener('click', () => {
+            sayac++;
+            tokatSayac.textContent = `Erdem ${sayac} kez tokatlandı.`;
+
+            if (sayac === 1) {
+                gif.style.display = 'block';
+                tokatSesi.play();
+            }
+        });
+    </script>
+</body>
+</html>
