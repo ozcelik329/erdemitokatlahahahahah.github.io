@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erdemi Döv</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        #tokatButonu {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        #tokatButonu img {
+            max-width: 100px;
+        }
+
+        #tokatSayac {
+            font-size: 24px;
+            margin-top: 10px;
+        }
+
+        .video-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, 50%);
+        }
+
+        .video {
+            width: 320px;
+            height: 180px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button id="tokatButonu">
+            <img src="https://static.vecteezy.com/system/resources/previews/002/046/954/large_2x/comic-speech-bubble-with-slap-text-free-vector.jpg" alt="Tokat Resmi">
+        </button>
+        <p id="tokatSayac">0</p>
+    </div>
+    <div class="video-container">
+        <video id="tokatVideo" class="video" controls>
+            <source src="https://github.com/ozcelik329/erdemitokatlahahahahah/raw/main/ERDEMZOMB%C4%B0DENTOKATY%C4%B0YOR2.mp4" type="video/mp4">
+        </video>
+        <audio id="tokatSesi">
+            <source src="https://github.com/ozcelik329/erdemitokatlahahahahah/raw/main/face-punch-91909.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+    <script>
+        const tokatButonu = document.getElementById('tokatButonu');
+        const tokatSayac = document.getElementById('tokatSayac');
+        const videoContainer = document.querySelector('.video-container');
+        const tokatVideo = document.getElementById('tokatVideo');
+        const tokatSesi = document.getElementById('tokatSesi');
+
+        let sayac = 0;
+
+        tokatButonu.addEventListener('click', () => {
+            sayac++;
+            tokatSayac.textContent = `Erdem ${sayac} kez tokatlandı.`;
+
+            if (sayac === 1) {
+                videoContainer.style.display = 'block';
+                tokatVideo.play();
+            } else {
+                tokatVideo.currentTime = 0;
+                tokatSesi.currentTime = 0;
+                tokatVideo.play();
+            }
+        });
+    </script>
+</body>
+</html>
