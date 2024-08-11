@@ -1,65 +1,87 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Erdemi Tokatlama Oyunu</title>
+  <title>Erdemi Döv</title>
   <style>
-    /* CSS stiliniz burada */
+    /* Sayfa stilini belirleyen CSS kodları */
     body {
       font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
       text-align: center;
     }
-
-    .oyun-alani {
-      margin-top: 50px;
+    .video-container {
+      position: relative;
     }
-
     video {
       width: 320px;
-      height: 240px;
+      height: 180px;
     }
   </style>
 </head>
 <body>
-  <h1>Erdemi Tokatla!</h1>
-  <div class="oyun-alani">
-    <button id="tokatButonu">Tokat At!</button>
-    <p id="tokatSayaci">Erdem henüz tokatlanmadı.</p>
-    <video id="tokatVideo" controls></video>
-    <audio id="tokatSesi"></audio>
+  <div class="container">
+    <button id="tokatButonu">Tokat</button>
+    <p id="tokatSayac">0</p>
   </div>
-
+  <div class="video-container">
+    <video id="tokatVideo" class="video" controls>
+      <source src="https://github.com/ozcelik329/erdemitokatlahahahahah/raw/main/ERDEMZOMB%C4%B0DENTOKATY%C4%B0YOR2.mp4" type="video/mp4">
+    </video>
+  </div>
   <script>
+    // JavaScript kodları
     const tokatButonu = document.getElementById('tokatButonu');
-    const tokatSayaci = document.getElementById('tokatSayaci');
+    const tokatSayac = document.getElementById('tokatSayac');
     const tokatVideo = document.getElementById('tokatVideo');
-    const tokatSesi = document.getElementById('tokatSesi');
+    let sayac = 0;
+    let pipMode = false;
 
-    let tokatSayisi = 0;
-
-    // Video ve ses dosyalarının URL'leri
-    const videoURL = "https://github.com/ozcelik329/erdemitokatlahahahahah/raw/main/ERDEMZOMB%C4%B0DENTOKATY%C4%B0YOR2.mp4";
-    const sesURL = "https://github.com/ozcelik329/erdemitokatlahahahahah/raw/main/face-punch-91909.mp3";
-
-    // Video ve sesi yükleme
-    tokatVideo.src = videoURL;
-    tokatSesi.src = sesURL;
-
-    tokatButonu.addEventListener('click', () => {
-      tokatSayisi++;
-      tokatSayaci.textContent = `Erdem ${tokatSayisi} kez tokatlandı!`;
-
-      tokatVideo.currentTime = 0;
-      tokatVideo.play();
-      tokatSesi.play();
-
-      // PiP moduna geçirme isteği
+    tokatVideo.addEventListener('loadedmetadata', () => {
       if (tokatVideo.requestPictureInPicture) {
         tokatVideo.requestPictureInPicture()
+          .then(() => {
+            console.log('Video PiP moduna alındı.');
+            pipMode = true;
+          })
           .catch(error => {
-            console.error('PiP modu başarısız oldu:', error);
+            console.error('PiP moduna geçilemedi:', error);
           });
+      } else {
+        console.error('Tarayıcınız PiP modunu desteklemiyor.');
+      }
+    });
+
+    tokatButonu.addEventListener('click', () => {
+      sayac++;
+      tokatSayac.textContent = `Erdem ${sayac} kez tokatlandı.`;
+
+      if (pipMode) {
+        document.exitPictureInPicture();
+        pipMode = false;
+        console.log('PiP modundan çıkıldı.');
+      } else {
+        if (tokatVideo.requestPictureInPicture) {
+          tokatVideo.requestPictureInPicture()
+            .then(() => {
+              console.log('Video PiP moduna alındı.');
+              pipMode = true;
+            })
+            .catch(error => {
+              console.error('PiP moduna geçilemedi:', error);
+            });
+        } else {
+          console.error.log('Tarayıcınız PiP modunu desteklemiyor.');
+        }
       }
     });
   </script>
