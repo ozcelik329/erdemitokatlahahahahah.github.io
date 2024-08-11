@@ -1,47 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Erdemi Döv</title>
+  <title>Erdemi Tokatlama Oyunu</title>
   <style>
     /* CSS stiliniz burada */
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    .oyun-alani {
+      margin-top: 50px;
+    }
+
+    video {
+      width: 320px;
+      height: 240px;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <button id="tokatButonu">
-      <img src="https://static.vecteezy.com/system/resources/previews/002/046/954/large_2x/comic-speech-bubble-with-slap-text-free-vector.jpg" alt="Tokat Resmi">
-    </button>
-    <p id="tokatSayac">0</p>
+  <h1>Erdemi Tokatla!</h1>
+  <div class="oyun-alani">
+    <button id="tokatButonu">Tokat At!</button>
+    <p id="tokatSayaci">Erdem henüz tokatlanmadı.</p>
+    <video id="tokatVideo" controls></video>
+    <audio id="tokatSesi"></audio>
   </div>
-  <div class="video-container">
-    <video id="tokatVideo" class="video" controls>
-      <source src="https://github.com/ozcelik329/erdemitokatlahahahahah/raw/main/ERDEMZOMB%C4%B0DENTOKATY%C4%B0YOR2.mp4" type="video/mp4">
-    </video>
-  </div>
+
   <script>
     const tokatButonu = document.getElementById('tokatButonu');
-    const tokatSayac = document.getElementById('tokatSayac');
+    const tokatSayaci = document.getElementById('tokatSayaci');
     const tokatVideo = document.getElementById('tokatVideo');
+    const tokatSesi = document.getElementById('tokatSesi');
 
-    let sayac = 0;
+    let tokatSayisi = 0;
+
+    // Video ve ses dosyalarının URL'leri
+    const videoURL = "https://github.com/ozcelik329/erdemitokatlahahahahah/raw/main/ERDEMZOMB%C4%B0DENTOKATY%C4%B0YOR2.mp4";
+    const sesURL = "https://github.com/ozcelik329/erdemitokatlahahahahah/raw/main/face-punch-91909.mp3";
+
+    // Video ve sesi yükleme
+    tokatVideo.src = videoURL;
+    tokatSesi.src = sesURL;
 
     tokatButonu.addEventListener('click', () => {
-      sayac++;
-      tokatSayac.textContent = `Erdem ${sayac} kez tokatlandı.`;
+      tokatSayisi++;
+      tokatSayaci.textContent = `Erdem ${tokatSayisi} kez tokatlandı!`;
 
-      tokatVideo.currentTime = 0; // Videoyu baştan başlat
+      tokatVideo.currentTime = 0;
       tokatVideo.play();
+      tokatSesi.play();
 
       // PiP moduna geçirme isteği
       if (tokatVideo.requestPictureInPicture) {
         tokatVideo.requestPictureInPicture()
           .catch(error => {
-            console.error('PiP mode failed:', error);
+            console.error('PiP modu başarısız oldu:', error);
           });
       }
     });
   </script>
 </body>
 </html>
+
